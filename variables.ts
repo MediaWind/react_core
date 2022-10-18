@@ -91,6 +91,8 @@ export class DefaultVariables {
 				return RATIO.H14_9;
 			case 1.77:
 				return RATIO.H16_9;
+			case 0.56:
+				return RATIO.V9_16;
 			default:
 				console.log("new ratio: " + ratio + " original full ration: " + this.WIDTH / this.HEIGHT);
 
