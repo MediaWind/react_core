@@ -13,7 +13,7 @@ export enum RATIO {
 export class DefaultVariables {
 	static ID_MEDIA = (process.env.NODE_ENV === "production" ? parseInt("{id_media}") : 0) as number;
 	static WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{width}") : 1920) as number;
-	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : 540) as number;
+	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : 1080) as number;
 	static MODE_LAYOUT = process.env.NODE_ENV === "production" ? "{mode_layout}" : undefined;
 	static ID_PLAYER = (process.env.NODE_ENV === "production" ? parseInt("{id_player}") : 0) as number;
 	static SERIAL_PLAYER = (process.env.NODE_ENV === "production" ? "{serial_player}" : "0001C02A7E18") as string;
