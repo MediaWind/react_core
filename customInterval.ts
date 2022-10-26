@@ -22,5 +22,7 @@ export function setIntervalRange(action: CallableFunction, intervals: number[]):
 
 	const interval = Math.floor(Math.random() * (intervals[1] - intervals[0]) ) + intervals[0];
 
+	console.log("setIntervalRange", interval);
+
 	return setInterval(() => action(), interval);
 }
