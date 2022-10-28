@@ -14,6 +14,7 @@ export enum RATIO {
 }
 
 export class DefaultVariables {
+	//TODO: check for boolean if it work correctly
 	static ID_MEDIA = (process.env.NODE_ENV === "production" ? parseInt("{id_media}") : 0) as number;
 	static WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{width}") : 1080) as number;
 	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : 1920) as number;
@@ -26,18 +27,15 @@ export class DefaultVariables {
 	static WIDGET_FOLDER = (process.env.NODE_ENV === "production" ? "{widget_folder}" : "/") as string;
 	static DOMAINE = (process.env.NODE_ENV === "production" ? "{domaine}" : "modules.greenplayer.com") as string;
 	static DOMAINE_HTTP = (process.env.NODE_ENV === "production" ? "{domaine_http}" : "https://modules.greenplayer.com") as string;
-
-	//TODO: adapt the type casting
-	//TODO: check for boolean if it work correctly
 	static TYPE_PLAYER = (process.env.NODE_ENV === "production" ? parseInt("{type_player}") : 0) as number;
-	static NAME_PLAYER = (process.env.NODE_ENV === "production" ? "{name_player}" : "") as string;
-	static DISPLAY_SIZE_INCH = (process.env.NODE_ENV === "production" ? "{display_size_inch}" : "") as string;
-	static DISPLAY_BRAND = (process.env.NODE_ENV === "production" ? "{display_brand}" : "") as string;
-	static DISPLAY_MODEL = (process.env.NODE_ENV === "production" ? "{display_model}" : "") as string;
-	static VIEWPORT_WIDTH = (process.env.NODE_ENV === "production" ? "{viewport_width}" : "") as string;
-	static VIEWPORT_HEIGHT = (process.env.NODE_ENV === "production" ? "{viewport_height}" : "") as string;
-	static LATITUDE_PLAYER = (process.env.NODE_ENV === "production" ? "{latitude_player}" : "") as string;
-	static LONGITUDE_PLAYER = (process.env.NODE_ENV === "production" ? "{longitude_player}" : "") as string;
+	static NAME_PLAYER = (process.env.NODE_ENV === "production" ? "{name_player}" : "Development Environment") as string;
+	static DISPLAY_SIZE_INCH = (process.env.NODE_ENV === "production" ? parseFloat("{display_size_inch}") : 0.0) as number;
+	static DISPLAY_BRAND = (process.env.NODE_ENV === "production" ? "{display_brand}" : "NodeJs") as string;
+	static DISPLAY_MODEL = (process.env.NODE_ENV === "production" ? "{display_model}" : "ReactJs") as string;
+	static VIEWPORT_WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{viewport_width}") : 1920) as number;
+	static VIEWPORT_HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{viewport_height}") : 1080) as number;
+	static LATITUDE_PLAYER = (process.env.NODE_ENV === "production" ? parseFloat("{latitude_player}") : 0.00) as number;
+	static LONGITUDE_PLAYER = (process.env.NODE_ENV === "production" ? parseFloat("{longitude_player}") : 0.00) as number;
 	static LOCATION_CONTINENT = (process.env.NODE_ENV === "production" ? "{location_continent}" : "") as string;
 	static LOCATION_DISTRICT = (process.env.NODE_ENV === "production" ? "{location_district}" : "") as string;
 	static LOCATION_COUNTRY = (process.env.NODE_ENV === "production" ? "{location_country}" : "") as string;
@@ -45,10 +43,10 @@ export class DefaultVariables {
 	static LOCATION_CITY = (process.env.NODE_ENV === "production" ? "{location_city}" : "") as string;
 	static LOCATION_POSTALCODE = (process.env.NODE_ENV === "production" ? "{location_postalcode}" : "") as string;
 	static LOCATION_BUILDING = (process.env.NODE_ENV === "production" ? "{location_building}" : "") as string;
-	static ID_BUILDING = (process.env.NODE_ENV === "production" ? "{id_building}" : "") as string;
-	static ACCOUNT_REF = (process.env.NODE_ENV === "production" ? "{account_ref}" : "") as string;
-	static ACCOUNT_KEY = (process.env.NODE_ENV === "production" ? "{account_key}" : "") as string;
-	static PATH_CONTENT = (process.env.NODE_ENV === "production" ? "{path_content}" : "") as string;
+	static ID_BUILDING = (process.env.NODE_ENV === "production" ? parseInt("{id_building}") : 25) as number;
+	static ACCOUNT_REF = (process.env.NODE_ENV === "production" ? "{account_ref}" : "greenp60") as string;
+	static ACCOUNT_KEY = (process.env.NODE_ENV === "production" ? "{account_key}" : "yxfhAvfIMDxCAxY") as string;
+	static PATH_CONTENT = (process.env.NODE_ENV === "production" ? "{path_content}" : "/") as string;
 	static DATE_GENERATE = (process.env.NODE_ENV === "production" ? "{date_generate}" : "") as string;
 	static URL_JSIGNAGE = (process.env.NODE_ENV === "production" ? "{url_jsignage}" : "") as string;
 	static URL_GPSIGNAGE = (process.env.NODE_ENV === "production" ? "{url_gpsignage}" : "") as string;
@@ -59,21 +57,18 @@ export class DefaultVariables {
 	static URL_JCOMMON = (process.env.NODE_ENV === "production" ? "{url_jcommon}" : "") as string;
 	static URL_XML2JSON = (process.env.NODE_ENV === "production" ? "{url_xml2_json}" : "") as string;
 	static KEY_MEDIA = (process.env.NODE_ENV === "production" ? "{key_media}" : "") as string;
-	static ROOT_FOLDER = (process.env.NODE_ENV === "production" ? "{root_folder}" : "") as string;
-	static IP_PLAYER = (process.env.NODE_ENV === "production" ? "{ip_player}" : "") as string;
+	static ROOT_FOLDER = (process.env.NODE_ENV === "production" ? "{root_folder}" : "/") as string;
+	static IP_PLAYER = (process.env.NODE_ENV === "production" ? "{ip_player}" : "127.0.0.1") as string;
 	static PREVIEW = (process.env.NODE_ENV === "production" ? parseBoolean("{preview}") : true) as boolean;
-	static LOOP = (process.env.NODE_ENV === "production" ? "{loop}" : "") as string;
+	static LOOP = (process.env.NODE_ENV === "production" ? parseBoolean("{loop}") : "") as boolean;
 	static DUR = (process.env.NODE_ENV === "production" ? "{dur}" : "") as string;
 	static URL_NOTIFICATION_RSS = (process.env.NODE_ENV === "production" ? "{url_notification_rss}" : "") as string;
 	static URL_NOTIFICATION_JSON = (process.env.NODE_ENV === "production" ? "{url_notification_json}" : "") as string;
-	static KEEP_WIDGET_RATIO = (process.env.NODE_ENV === "production" ? "{keep_widget_ratio}" : "") as string;
-	static COLOR_BACKGROUND = (process.env.NODE_ENV === "production" ? "{color_background}" : "") as string;
-	static ID_MEDIA_BACKGROUND = (process.env.NODE_ENV === "production" ? "{id_media_background}" : "") as string;
-	static BACKGROUND_IMAGE = (process.env.NODE_ENV === "production" ? "{background_image}" : "") as string;
-	static PREVIEW_MEDIA = (process.env.NODE_ENV === "production" ? "{preview_media}" : "") as string;
+	static KEEP_WIDGET_RATIO = (process.env.NODE_ENV === "production" ? parseBoolean("{keep_widget_ratio}") : "") as boolean;
+	static PREVIEW_MEDIA = (process.env.NODE_ENV === "production" ? parseBoolean("{preview_media}") : false) as boolean;
 	static URL_VARIABLE = (process.env.NODE_ENV === "production" ? "{url_variable}" : "") as string;
 	static BG_COLOR = (process.env.NODE_ENV === "production" ? "{bg_color}" : "") as string;
-	static LAYER = (process.env.NODE_ENV === "production" ? "{layer}" : "") as string;
+	static LAYER = (process.env.NODE_ENV === "production" ? "{layer}" : "/") as string;
 
 	static C_ORIENTATION(): ORIENTATION {
 		if (this.HEIGHT > this.WIDTH) {
