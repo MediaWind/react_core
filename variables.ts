@@ -10,12 +10,13 @@ export enum RATIO {
 	H16_9 = "16:9",
 	H32_9 = "32:9",
 	H14_9 = "14:9",
+	H16_10 = "16:10",
 }
 
 export class DefaultVariables {
 	static ID_MEDIA = (process.env.NODE_ENV === "production" ? parseInt("{id_media}") : 0) as number;
-	static WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{width}") : 1920) as number;
-	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : 1080) as number;
+	static WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{width}") : 1080) as number;
+	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : 1920) as number;
 	static MODE_LAYOUT = process.env.NODE_ENV === "production" ? "{mode_layout}" : "" as string;
 	static ID_PLAYER = (process.env.NODE_ENV === "production" ? parseInt("{id_player}") : 0) as number;
 	static SERIAL_PLAYER = (process.env.NODE_ENV === "production" ? "{serial_player}" : "0001C02A7E18") as string;
@@ -90,6 +91,8 @@ export class DefaultVariables {
 				return RATIO.H32_9;
 			case 1.56:
 				return RATIO.H14_9;
+			case 1.6:
+				return RATIO.H16_10;
 			case 1.77:
 				return RATIO.H16_9;
 			case 0.56:
