@@ -1,5 +1,5 @@
 function groupByTwo<T>(array: any[]): T[][] {
-	let result = [] as any[];
+	const result = [] as any[];
 
 	array.forEach((item, index) => {
 		const normalizedIndex = Math.floor(index / 2);
