@@ -16,8 +16,8 @@ export enum RATIO {
 export class DefaultVariables {
 	//TODO: check for boolean if it work correctly
 	static ID_MEDIA = (process.env.NODE_ENV === "production" ? parseInt("{id_media}") : 0) as number;
-	static WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{width}") : 1080) as number;
-	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : 1920) as number;
+	static WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{width}") : 1920) as number;
+	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : 1080) as number;
 	static MODE_LAYOUT = process.env.NODE_ENV === "production" ? "{mode_layout}" : "" as string;
 	static ID_PLAYER = (process.env.NODE_ENV === "production" ? parseInt("{id_player}") : 0) as number;
 	static SERIAL_PLAYER = (process.env.NODE_ENV === "production" ? "{serial_player}" : "0001C02A7E18") as string;
@@ -69,6 +69,12 @@ export class DefaultVariables {
 	static URL_VARIABLE = (process.env.NODE_ENV === "production" ? "{url_variable}" : "") as string;
 	static BG_COLOR = (process.env.NODE_ENV === "production" ? "{bg_color}" : "") as string;
 	static LAYER = (process.env.NODE_ENV === "production" ? "{layer}" : "/") as string;
+
+	static C_FULL_SCREEN(): boolean {
+		console.log("full screen:", this.HEIGHT, this.VIEWPORT_HEIGHT, this.WIDTH, this.VIEWPORT_WIDTH, this.HEIGHT == this.VIEWPORT_HEIGHT, this.WIDTH == this.VIEWPORT_WIDTH, this.HEIGHT == this.VIEWPORT_HEIGHT && this.WIDTH == this.VIEWPORT_WIDTH);
+
+		return this.HEIGHT == this.VIEWPORT_HEIGHT && this.WIDTH == this.VIEWPORT_WIDTH;
+	}
 
 	static C_ORIENTATION(): ORIENTATION {
 		if (this.HEIGHT > this.WIDTH) {
