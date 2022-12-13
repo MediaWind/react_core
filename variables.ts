@@ -16,8 +16,8 @@ export enum RATIO {
 export class DefaultVariables {
 	//TODO: check for boolean if it work correctly
 	static ID_MEDIA = (process.env.NODE_ENV === "production" ? parseInt("{id_media}") : 0) as number;
-	static WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{width}") : 1920) as number;
-	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : 1080) as number;
+	static WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{width}") : 1280) as number;
+	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : 800) as number;
 	static MODE_LAYOUT = process.env.NODE_ENV === "production" ? "{mode_layout}" : "" as string;
 	static ID_PLAYER = (process.env.NODE_ENV === "production" ? parseInt("{id_player}") : 0) as number;
 	static SERIAL_PLAYER = (process.env.NODE_ENV === "production" ? "{serial_player}" : "0001C02A7E18") as string;
@@ -32,8 +32,8 @@ export class DefaultVariables {
 	static DISPLAY_SIZE_INCH = (process.env.NODE_ENV === "production" ? parseFloat("{display_size_inch}") : 0.0) as number;
 	static DISPLAY_BRAND = (process.env.NODE_ENV === "production" ? "{display_brand}" : "NodeJs") as string;
 	static DISPLAY_MODEL = (process.env.NODE_ENV === "production" ? "{display_model}" : "ReactJs") as string;
-	static VIEWPORT_WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{viewport_width}") : 1920) as number;
-	static VIEWPORT_HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{viewport_height}") : 1080) as number;
+	static VIEWPORT_WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{viewport_width}") : 1280) as number;
+	static VIEWPORT_HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{viewport_height}") : 800) as number;
 	static LATITUDE_PLAYER = (process.env.NODE_ENV === "production" ? parseFloat("{latitude_player}") : 0.00) as number;
 	static LONGITUDE_PLAYER = (process.env.NODE_ENV === "production" ? parseFloat("{longitude_player}") : 0.00) as number;
 	static LOCATION_CONTINENT = (process.env.NODE_ENV === "production" ? "{location_continent}" : "") as string;
