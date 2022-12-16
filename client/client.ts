@@ -39,6 +39,7 @@ export class KiteClient {
 	 * Android Only
 	 * Temporarily lock the device
 	 */
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	lock(status: boolean): void {
 		_kitedevice.call("lock");
 	}
@@ -47,6 +48,7 @@ export class KiteClient {
 	 * Android Only
 	 * Temporarily unlock the device
 	 */
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	unlock(status: boolean): void {
 		_kitedevice.call("unlock");
 	}
@@ -124,7 +126,7 @@ class EMDK extends (EventEmitter as new () => TypedEmitter<EMDKCallbacks>) {
 	}
 }
 
-interface LedData {
+export interface LedData {
 	r: number,
 	g: number,
 	b: number,
