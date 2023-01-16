@@ -67,7 +67,7 @@ export class ProDVX {
 		}
 	}
 
-	//TODO this will be needed fot the meeting widget
+	// TODO this will be needed fot the meeting widget
 	// public static setProgress(progress: number, filledColor: LedData, toFillColor: LedData) {
 	// ProDVX.init();
 

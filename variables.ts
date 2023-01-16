@@ -14,7 +14,7 @@ export enum RATIO {
 }
 
 export class DefaultVariables {
-	//TODO: check for boolean if it work correctly
+	// TODO: check for boolean if it work correctly
 	static ID_MEDIA = (process.env.NODE_ENV === "production" ? parseInt("{id_media}") : 0) as number;
 	static WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{width}") : 1920) as number;
 	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : 1080) as number;
