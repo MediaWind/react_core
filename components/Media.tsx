@@ -1,0 +1,87 @@
+import "../styles/Media.scss";
+
+import mime from "mime";
+
+import useHtml from "../hooks/useHtml";
+
+interface IMediaProps {
+	UUID: string;
+	url: string;
+	top: number;
+	bottom: number;
+	left: number;
+	right: number;
+}
+
+function Media(props: IMediaProps): JSX.Element {
+	if (props.url == "") {
+		return <p>{"You have selected the display of a media in the absence of deceased, but you have not selected any media."}</p>;
+	}
+
+	const type = mime.getType(props.url) as string;
+	const extension = props.url.split(".").pop();
+
+	let container = document.getElementById(props.UUID);
+
+	if (container == null) {
+		const temp = document.createElement("div");
+		temp.setAttribute("id", props.UUID);
+
+		document.getElementById("root")?.appendChild(temp);
+
+		container = document.getElementById(props.UUID);
+	}
+
+	if (container != null) {
+		container.classList.add("media");
+		container.innerHTML = "";
+
+		switch (type) {
+			case "text/html":
+				if (extension == "htm") {
+					const request = new XMLHttpRequest();
+					request.open("GET", props.url, false);
+					request.send(null);
+
+					useHtml(request.response, container);
+				} else {
+					container.innerHTML = `<iframe src="${props.url}"></iframe>`;
+				}
+
+				break;
+			case "application/javascript":
+				useHtml(`<script src="${props.url}"></script>`, container);
+
+				break;
+			case "video/mp4":
+				container.innerHTML = `<video src="${props.url}" autoPlay muted loop></video>`;
+
+				break;
+			case "image/png":
+			case "image/jpeg":
+				container.innerHTML = `<img src="${props.url}" />`;
+
+				break;
+			default:
+				container.innerHTML = `<p>Type: "${type}" isn't supported, media link: "${props.url}". Please take a photo and contact us at support@mediawind.be</p>`;
+
+				break;
+		}
+	}
+
+	return <style>
+		{`
+			.media {
+				position: absolute;
+				top: ${props.top}%;
+				bottom: ${props.bottom}%;
+				left: ${props.left}%;
+				right: ${props.right}%;
+				width: ${100 - (props.left + props.right)}%;
+				height: ${100 - (props.top + props.bottom)}%;
+			}
+		`}
+	</style>;
+}
+
+export default Media;
