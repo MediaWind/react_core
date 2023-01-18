@@ -63,7 +63,7 @@ function Media(props: IMediaProps): JSX.Element {
 
 				break;
 			default:
-				container.innerHTML = `<p>Type: "${type}" isn't supported, media link: "${props.url}". Please take a photo and contact us at support@mediawind.be</p>`;
+				container.innerHTML = `<p>Type: "${type}" isn't supported, media error.</p>`;
 
 				break;
 		}
