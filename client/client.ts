@@ -39,8 +39,7 @@ export class KiteClient {
 	 * Android Only
 	 * Temporarily lock the device
 	 */
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	lock(status: boolean): void {
+	lock(): void {
 		_kitedevice.call("lock");
 	}
 
@@ -48,8 +47,7 @@ export class KiteClient {
 	 * Android Only
 	 * Temporarily unlock the device
 	 */
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	unlock(status: boolean): void {
+	unlock(): void {
 		_kitedevice.call("unlock");
 	}
 
@@ -82,7 +80,7 @@ export enum EMDKEvent {
 	DataScanned = "data_scanned",
 }
 
-interface ScanData {
+export interface ScanData {
 	/**
 	* Binary data
 	*/
@@ -97,7 +95,7 @@ type EMDKCallbacks = {
 	data_scanned: (data: ScanData) => void
 }
 
-class EMDK extends (EventEmitter as new () => TypedEmitter<EMDKCallbacks>) {
+export class EMDK extends (EventEmitter as new () => TypedEmitter<EMDKCallbacks>) {
 	private static instance: EMDK;
 
 	private constructor() {
@@ -132,7 +130,7 @@ export interface LedData {
 	b: number,
 }
 
-class SurroundLed {
+export class SurroundLed {
 	private static instance: SurroundLed;
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -151,5 +149,29 @@ class SurroundLed {
 			SurroundLed.instance = new SurroundLed();
 
 		return SurroundLed.instance;
+	}
+}
+
+
+export class SICP {
+	private static instance: SICP;
+
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	private constructor() {}
+
+	/**
+	* Change the color of the sidebar LEDS
+	* status: Enable the LEDS
+	* rgb: Hex color
+	*/
+	setLeds(status: boolean, rgb: number): void {
+		_kitedevice.call("sicpSetLeds", {status: status, rgb: rgb,});
+	}
+
+	public static getInstance(): SICP {
+		if (!SICP.instance)
+			SICP.instance = new SICP();
+
+		return SICP.instance;
 	}
 }
