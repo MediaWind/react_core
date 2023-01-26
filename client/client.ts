@@ -8,7 +8,7 @@
 
 import EventEmitter from "events";
 import type TypedEmitter from "typed-emitter";
-import {Base64} from "js-base64";
+import { Base64 } from "js-base64";
 
 /// Each platform is able and must define window._kitedevice_internal
 const _kitedevice = (window as any)._kitedevice_internal;
@@ -24,7 +24,7 @@ export class KiteClient {
 
 	// Enable/Disable device screen
 	setBacklightStatus(status: boolean): void {
-		_kitedevice.call("setBacklightStatus", {status: status,});
+		_kitedevice.call("setBacklightStatus", { status: status, });
 	}
 
 	/**
@@ -32,7 +32,7 @@ export class KiteClient {
 	* Disable Kiosk Mode
 	*/
 	setKioskMode(status: boolean): void {
-		_kitedevice.call("setKioskMode", {status: status,});
+		_kitedevice.call("setKioskMode", { status: status, });
 	}
 
 	/**
@@ -134,7 +134,7 @@ export class SurroundLed {
 	private static instance: SurroundLed;
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	private constructor() {}
+	private constructor() { }
 
 	/**
 	* Update the Surround Led Bar of ProDVX.
@@ -157,7 +157,7 @@ export class SICP {
 	private static instance: SICP;
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	private constructor() {}
+	private constructor() { }
 
 	/**
 	* Change the color of the sidebar LEDS
@@ -165,7 +165,15 @@ export class SICP {
 	* rgb: Hex color
 	*/
 	setLeds(status: boolean, rgb: number): void {
-		_kitedevice.call("sicpSetLeds", {status: status, rgb: rgb,});
+		_kitedevice.call("sicpSetLeds", { status: status, rgb: rgb, });
+	}
+
+	/**
+	* Send data to SICP
+	* The length and the checksum are automatically calculated
+	*/
+	sendMessage(data: Uint8Array): void {
+		_kitedevice.call("sicpSendMessage", { data: Base64.fromUint8Array(data), });
 	}
 
 	public static getInstance(): SICP {
