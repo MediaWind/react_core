@@ -74,6 +74,14 @@ export class KiteClient {
 	getSurroundLED(): SurroundLed {
 		return SurroundLed.getInstance();
 	}
+
+	/**
+	* Android Only
+	* Sicp
+	*/
+	getSicp(): SICP {
+		return SICP.getInstance();
+	}
 }
 
 export enum EMDKEvent {

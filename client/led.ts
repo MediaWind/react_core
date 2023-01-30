@@ -42,6 +42,7 @@ export class ProDVX {
 			ProDVX.ledHistory = led;
 		} catch (error) {
 			console.error("ProDVX error, maybe the player isn't a ProDVX ?");
+			console.log("Anyway color would have been set to:", JSON.stringify(color));
 		}
 	}
 
@@ -53,6 +54,7 @@ export class ProDVX {
 			ProDVX.ledHistory = colors;
 		} catch (error) {
 			console.error("ProDVX error, maybe the player isn't a ProDVX ?");
+			console.log("Anyway color would have been set to:", JSON.stringify(colors));
 		}
 	}
 
@@ -64,6 +66,7 @@ export class ProDVX {
 			ProDVX.kiteDevice.getSurroundLED().setLeds(ProDVX.ledHistory);
 		} catch (error) {
 			console.error("ProDVX error, maybe the player isn't a ProDVX ?");
+			console.log("Anyway color would have been set to:", JSON.stringify(color));
 		}
 	}
 
@@ -82,4 +85,40 @@ export class ProDVX {
 	// this.setOne(normalizedLedOrder[0], filledColor);
 	// this.setOne(normalizedLedOrder[10], filledColor);
 	// }
+}
+
+export class Sicp {
+	private static kiteDevice: KiteClient;
+
+	private static ledHistory: LedData[] = [];
+
+	private static init() {
+		try {
+			if (!Sicp.kiteDevice) {
+				console.log("KiteDevice initialized");
+
+				Sicp.kiteDevice = new KiteClient();
+
+				for (let i = 0; i < 52; i++) {
+					Sicp.ledHistory.push({
+						r: 0,
+						g: 0,
+						b: 0,
+					});
+				}
+			}
+		} catch (error) {
+			console.error("Sicp error, maybe the player isn't compatible with SICP ?");
+		}
+	}
+
+	public static setAllSame(color: number) {
+		try {
+			Sicp.init();
+
+			Sicp.kiteDevice.getSicp().setLeds(true, color);
+		} catch (error) {
+			console.error("Sicp error, maybe the player isn't compatible with SICP ?");
+		}
+	}
 }
