@@ -7,15 +7,17 @@ import useHtml from "../hooks/useHtml";
 interface IMediaProps {
 	UUID: string;
 	url: string;
+	emptyUrlError: string;
 	top: number;
 	bottom: number;
 	left: number;
 	right: number;
+	muted: boolean;
 }
 
 function Media(props: IMediaProps): JSX.Element {
 	if (props.url == "") {
-		return <p>{"You have selected the display of a media in the absence of deceased, but you have not selected any media."}</p>;
+		return <p>{props.emptyUrlError}</p>;
 	}
 
 	const type = mime.getType(props.url) as string;
@@ -54,7 +56,7 @@ function Media(props: IMediaProps): JSX.Element {
 
 				break;
 			case "video/mp4":
-				container.innerHTML = `<video src="${props.url}" autoPlay muted loop></video>`;
+				container.innerHTML = `<video src="${props.url}" autoPlay ${props.muted ? "muted" : ""} loop></video>`;
 
 				break;
 			case "image/png":
