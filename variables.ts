@@ -24,6 +24,10 @@ export class DefaultVariables {
 	static SERIAL = (process.env.NODE_ENV === "production" ? "{serial}" : "0001C02A7E18") as string;
 	static KEY_PLAYER = (process.env.NODE_ENV === "production" ? "{key_player}" : "ay3asIzHnxI0Q") as string;
 	static PLAYER_KEY = (process.env.NODE_ENV === "production" ? "{player_key}" : "ay3asIzHnxI0Q") as string;
+	static PLAYER_TYPE = (process.env.NODE_ENV === "production" ? parseInt("{player_type}") : 11) as number;
+	static PLAYER_TYPE_HW = (process.env.NODE_ENV === "production" ? parseInt("{player_type_hw}") : 28) as number;
+	static PLAYER_FAMILY = (process.env.NODE_ENV === "production" ? "{player_family}" : "android") as string;
+	static PLAYER_FIRMWARE = (process.env.NODE_ENV === "production" ? "{player_firmware}" : "0.5.10") as string;
 	static WIDGET_FOLDER = (process.env.NODE_ENV === "production" ? "{widget_folder}" : "/") as string;
 	static DOMAINE = (process.env.NODE_ENV === "production" ? "{domaine}" : "modules.greenplayer.com") as string;
 	static DOMAINE_HTTP = (process.env.NODE_ENV === "production" ? "{domaine_http}" : "https://modules.greenplayer.com") as string;
