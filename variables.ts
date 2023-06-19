@@ -16,18 +16,18 @@ export enum RATIO {
 export class DefaultVariables {
 	// TODO: check for boolean if it work correctly
 	static ID_MEDIA = (process.env.NODE_ENV === "production" ? parseInt("{id_media}") : 0) as number;
-	static WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{width}") : 1920) as number;
-	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : 1080) as number;
+	static WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{width}") : parseInt(process.env.REACT_APP_WIDTH ?? "1920")) as number;
+	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : parseInt(process.env.REACT_APP_HEIGHT ?? "1080")) as number;
 	static MODE_LAYOUT = process.env.NODE_ENV === "production" ? "{mode_layout}" : "" as string;
-	static ID_PLAYER = (process.env.NODE_ENV === "production" ? parseInt("{id_player}") : 57) as number;
-	static SERIAL_PLAYER = (process.env.NODE_ENV === "production" ? "{serial_player}" : "0001C02A7E18") as string;
-	static SERIAL = (process.env.NODE_ENV === "production" ? "{serial}" : "0001C02A7E18") as string;
-	static KEY_PLAYER = (process.env.NODE_ENV === "production" ? "{key_player}" : "ay3asIzHnxI0Q") as string;
-	static PLAYER_KEY = (process.env.NODE_ENV === "production" ? "{player_key}" : "ay3asIzHnxI0Q") as string;
-	static PLAYER_TYPE = (process.env.NODE_ENV === "production" ? parseInt("{player_type}") : 11) as number;
-	static PLAYER_TYPE_HW = (process.env.NODE_ENV === "production" ? parseInt("{player_type_hw}") : 28) as number;
-	static PLAYER_FAMILY = (process.env.NODE_ENV === "production" ? "{player_family}" : "android") as string;
-	static PLAYER_FIRMWARE = (process.env.NODE_ENV === "production" ? "{player_firmware}" : "0.5.10") as string;
+	static ID_PLAYER = (process.env.NODE_ENV === "production" ? parseInt("{id_player}") : parseInt(process.env.REACT_APP_ID_PLAYER ?? "57")) as number;
+	static SERIAL_PLAYER = (process.env.NODE_ENV === "production" ? "{serial_player}" : process.env.REACT_APP_SERIAL_PLAYER ?? "0001C02A7E18") as string;
+	static SERIAL = (process.env.NODE_ENV === "production" ? "{serial}" : process.env.REACT_APP_SERIAL_PLAYER ?? "0001C02A7E18") as string;
+	static KEY_PLAYER = (process.env.NODE_ENV === "production" ? "{key_player}" : process.env.REACT_APP_KEY_PLAYER ?? "ay3asIzHnxI0Q") as string;
+	static PLAYER_KEY = (process.env.NODE_ENV === "production" ? "{player_key}" : process.env.REACT_APP_KEY_PLAYER ?? "ay3asIzHnxI0Q") as string;
+	static PLAYER_TYPE = (process.env.NODE_ENV === "production" ? parseInt("{player_type}") : parseInt(process.env.REACT_APP_PLAYER_TYPE ?? "11")) as number;
+	static PLAYER_TYPE_HW = (process.env.NODE_ENV === "production" ? parseInt("{player_type_hw}") : parseInt(process.env.REACT_APP_PLAYER_TYPE_HW ?? "28")) as number;
+	static PLAYER_FAMILY = (process.env.NODE_ENV === "production" ? "{player_family}" : process.env. REACT_APP_PLAYER_FAMILY ?? "android") as string;
+	static PLAYER_FIRMWARE = (process.env.NODE_ENV === "production" ? "{player_firmware}" : process.env.REACT_APP_PLAYER_FIRMWARE ?? "0.5.10") as string;
 	static WIDGET_FOLDER = (process.env.NODE_ENV === "production" ? "{widget_folder}" : "/") as string;
 	static DOMAINE = (process.env.NODE_ENV === "production" ? "{domaine}" : "modules.greenplayer.com") as string;
 	static DOMAINE_HTTP = (process.env.NODE_ENV === "production" ? "{domaine_http}" : "https://modules.greenplayer.com") as string;
@@ -36,10 +36,10 @@ export class DefaultVariables {
 	static DISPLAY_SIZE_INCH = (process.env.NODE_ENV === "production" ? parseFloat("{display_size_inch}") : 0.0) as number;
 	static DISPLAY_BRAND = (process.env.NODE_ENV === "production" ? "{display_brand}" : "NodeJs") as string;
 	static DISPLAY_MODEL = (process.env.NODE_ENV === "production" ? "{display_model}" : "ReactJs") as string;
-	static VIEWPORT_WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{viewport_width}") : 1920) as number;
-	static VIEWPORT_HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{viewport_height}") : 1080) as number;
-	static LATITUDE_PLAYER = (process.env.NODE_ENV === "production" ? parseFloat("{latitude_player}") : 0.00) as number;
-	static LONGITUDE_PLAYER = (process.env.NODE_ENV === "production" ? parseFloat("{longitude_player}") : 0.00) as number;
+	static VIEWPORT_WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{viewport_width}") : parseInt(process.env.REACT_APP_VIEWPORT_WIDTH ?? "1920")) as number;
+	static VIEWPORT_HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{viewport_height}") : parseInt(process.env.REACT_APP_VIEWPORT_HEIGHT ?? "1080")) as number;
+	static LATITUDE_PLAYER = (process.env.NODE_ENV === "production" ? parseFloat("{latitude_player}") : parseFloat(process.env.REACT_APP_LATITUDE_PLAYER ?? "0.0")) as number;
+	static LONGITUDE_PLAYER = (process.env.NODE_ENV === "production" ? parseFloat("{longitude_player}") : parseFloat(process.env.REACT_APP_LONGITUDE_PLAYER ?? "0.0")) as number;
 	static LOCATION_CONTINENT = (process.env.NODE_ENV === "production" ? "{location_continent}" : "") as string;
 	static LOCATION_DISTRICT = (process.env.NODE_ENV === "production" ? "{location_district}" : "") as string;
 	static LOCATION_COUNTRY = (process.env.NODE_ENV === "production" ? "{location_country}" : "") as string;
@@ -48,8 +48,8 @@ export class DefaultVariables {
 	static LOCATION_POSTALCODE = (process.env.NODE_ENV === "production" ? "{location_postalcode}" : "") as string;
 	static LOCATION_BUILDING = (process.env.NODE_ENV === "production" ? "{location_building}" : "") as string;
 	static ID_BUILDING = (process.env.NODE_ENV === "production" ? parseInt("{id_building}") : 25) as number;
-	static ACCOUNT_REF = (process.env.NODE_ENV === "production" ? "{account_ref}" : "greenp60") as string;
-	static ACCOUNT_KEY = (process.env.NODE_ENV === "production" ? "{account_key}" : "yxfhAvfIMDxCAxY") as string;
+	static ACCOUNT_REF = (process.env.NODE_ENV === "production" ? "{account_ref}" : process.env.REACT_APP_ACCOUNT_REF ?? "greenp60") as string;
+	static ACCOUNT_KEY = (process.env.NODE_ENV === "production" ? "{account_key}" : process.env.REACT_APP_ACCOUNT_KEY ?? "yxfhAvfIMDxCAxY") as string;
 	static PATH_CONTENT = (process.env.NODE_ENV === "production" ? "{path_content}" : "/") as string;
 	static DATE_GENERATE = (process.env.NODE_ENV === "production" ? "{date_generate}" : "") as string;
 	static URL_JSIGNAGE = (process.env.NODE_ENV === "production" ? "{url_jsignage}" : "") as string;
