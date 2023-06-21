@@ -1,8 +1,8 @@
-function groupByTwo<T>(array: any[]): T[][] {
+function groupBy<T>(array: any[], groupLength: number): T[][] {
 	const result = [] as any[];
 
 	array.forEach((item, index) => {
-		const normalizedIndex = Math.floor(index / 2);
+		const normalizedIndex = Math.floor(index / groupLength);
 
 		if (result[normalizedIndex] === undefined) {
 			result[normalizedIndex] = [];
@@ -14,4 +14,4 @@ function groupByTwo<T>(array: any[]): T[][] {
 	return result;
 }
 
-export default groupByTwo;
+export default groupBy;
