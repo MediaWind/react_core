@@ -11,10 +11,10 @@ export enum RATIO {
 	H32_9 = "32:9",
 	H14_9 = "14:9",
 	H16_10 = "16:10",
+	V10_16 = "10:16",
 }
 
 export class DefaultVariables {
-	// TODO: check for boolean if it work correctly
 	static ID_MEDIA = (process.env.NODE_ENV === "production" ? parseInt("{id_media}") : 0) as number;
 	static WIDTH = (process.env.NODE_ENV === "production" ? parseInt("{width}") : parseInt(process.env.REACT_APP_WIDTH ?? "1920")) as number;
 	static HEIGHT = (process.env.NODE_ENV === "production" ? parseInt("{height}") : parseInt(process.env.REACT_APP_HEIGHT ?? "1080")) as number;
@@ -102,6 +102,8 @@ export class DefaultVariables {
 				return RATIO.H16_9;
 			case 0.56:
 				return RATIO.V9_16;
+			case 0.62:
+				return RATIO.V10_16;
 			default:
 				console.log("new ratio: " + ratio + " original full ration: " + this.WIDTH / this.HEIGHT);
 
