@@ -8,9 +8,18 @@ export function setIntervalSync(action: CallableFunction, interval: number): Nod
 
 	let loop: NodeJS.Timer | undefined = undefined;
 
-	setTimeout(function () {
-		loop = setInterval(() => action(), interval);
-	}, interval - (midnightTime % interval));
+	let init = false;
+
+	loop = setInterval(
+		() => { 
+			if (!init){
+				init = true;
+				setTimeout(action(), interval - (midnightTime % interval));
+			} else {
+				return action();
+			}
+		}, interval
+	);
 
 	return loop;
 }
