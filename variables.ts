@@ -12,6 +12,7 @@ export enum RATIO {
 	H14_9 = "14:9",
 	H16_10 = "16:10",
 	V10_16 = "10:16",
+	H5_4 = "5:4"
 }
 
 export class DefaultVariables {
@@ -104,6 +105,8 @@ export class DefaultVariables {
 				return RATIO.V9_16;
 			case 0.62:
 				return RATIO.V10_16;
+			case 1.25:
+				return RATIO.H5_4;
 			default:
 				console.log("new ratio: " + ratio + " original full ration: " + this.WIDTH / this.HEIGHT);
 
