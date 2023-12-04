@@ -1,26 +1,42 @@
 import { CSSProperties, useEffect, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
+import "dayjs/locale/fr";
+import "dayjs/locale/en";
+import "dayjs/locale/nl";
 
 export interface IDateTimeStyle {
 	format?: string;
 
-	color?: string;
+	fontFamily?: string;
 	fontSize?: string;
+	textAlign?: "center" | "left" | "right";
+	color?: string;
+
 	bgColor?: string;
 	borderRadius?: string;
-
-	textAlign?: "center" | "left" | "right";
 
 	margin?: string;
 	marginTop?: string;
 	marginBottom?: string;
 	marginLeft?: string;
 	marginRight?: string;
+
+	padding?: string;
+	paddingTop?: string;
+	paddingBottom?: string;
+	paddingLeft?: string;
+	paddingRight?: string;
 }
 
 export enum ORDER {
 	DATE_TIME,
 	TIME_DATE
+}
+
+export enum LOCALE {
+	FR = "fr",
+	EN = "en",
+	NL = "nl",
 }
 
 interface IDateTimeProps {
@@ -29,14 +45,17 @@ interface IDateTimeProps {
 	time?: IDateTimeStyle
 	oneLineDisplay?: boolean
 	order?: ORDER
+	locale?: LOCALE
 }
 
 export default function DateTime(props: IDateTimeProps): JSX.Element {
-	const { className, date, time, oneLineDisplay, order, } = props;
+	const { className, date, time, oneLineDisplay, order, locale, } = props;
 	const [dateTime, setDateTime] = useState<Dayjs>(dayjs());
 
 	const [dateStyle, setDateStyle] = useState<CSSProperties | undefined>();
 	const [timeStyle, setTimeStyle] = useState<CSSProperties | undefined>();
+
+	dayjs.locale(locale ? locale : "fr");
 
 	useEffect(() => {
 		setDateTime(dayjs());
@@ -51,8 +70,11 @@ export default function DateTime(props: IDateTimeProps): JSX.Element {
 	useEffect(() => {
 		if (date) {
 			setDateStyle({
-				color: date.color,
+				fontFamily: date.fontFamily,
 				fontSize: date.fontSize,
+				color: date.color,
+				textAlign: date.textAlign ?? "center",
+
 				backgroundColor: date.bgColor,
 				borderRadius: date.borderRadius,
 
@@ -62,14 +84,21 @@ export default function DateTime(props: IDateTimeProps): JSX.Element {
 				marginLeft: date.marginLeft,
 				marginRight: date.marginRight,
 
-				textAlign: date.textAlign ?? "center",
+				padding: date.padding,
+				paddingTop: date.paddingTop,
+				paddingBottom: date.paddingBottom,
+				paddingLeft: date.paddingLeft,
+				paddingRight: date.paddingRight,
 			});
 		}
 
 		if (time) {
 			setTimeStyle({
-				color: time.color,
+				fontFamily: time.fontFamily,
 				fontSize: time.fontSize,
+				color: time.color,
+				textAlign: time.textAlign ?? "center",
+
 				backgroundColor: time.bgColor,
 				borderRadius: time.borderRadius,
 
@@ -79,7 +108,11 @@ export default function DateTime(props: IDateTimeProps): JSX.Element {
 				marginLeft: time.marginLeft,
 				marginRight: time.marginRight,
 
-				textAlign: time.textAlign ?? "center",
+				padding: time.padding,
+				paddingTop: time.paddingTop,
+				paddingBottom: time.paddingBottom,
+				paddingLeft: time.paddingLeft,
+				paddingRight: time.paddingRight,
 			});
 		}
 	}, [date, time]);
