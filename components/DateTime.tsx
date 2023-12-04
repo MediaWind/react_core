@@ -7,6 +7,9 @@ import "dayjs/locale/nl";
 export interface IDateTimeStyle {
 	format?: string;
 
+	width?: string;
+	height?: string;
+
 	fontFamily?: string;
 	fontSize?: string;
 	textAlign?: "center" | "left" | "right";
@@ -70,6 +73,9 @@ export default function DateTime(props: IDateTimeProps): JSX.Element {
 	useEffect(() => {
 		if (date) {
 			setDateStyle({
+				width: date.width,
+				height: date.height,
+
 				fontFamily: date.fontFamily,
 				fontSize: date.fontSize,
 				color: date.color,
@@ -94,6 +100,9 @@ export default function DateTime(props: IDateTimeProps): JSX.Element {
 
 		if (time) {
 			setTimeStyle({
+				width: time.width,
+				height: time.height,
+
 				fontFamily: time.fontFamily,
 				fontSize: time.fontSize,
 				color: time.color,
