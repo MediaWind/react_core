@@ -11,7 +11,7 @@ export function setIntervalSync(action: CallableFunction, interval: number): Nod
 	let init = false;
 
 	loop = setInterval(
-		() => { 
+		() => {
 			if (!init){
 				init = true;
 				setTimeout(action(), interval - (midnightTime % interval));
@@ -31,7 +31,7 @@ export function setIntervalRange(action: CallableFunction, intervals: number[]):
 
 	const interval = Math.floor(Math.random() * (intervals[1] - intervals[0]) ) + intervals[0];
 
-	console.log("setIntervalRange", interval);
+	// console.log("setIntervalRange", interval);
 
 	return setInterval(() => action(), interval);
 }
