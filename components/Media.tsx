@@ -12,6 +12,7 @@ interface IMediaProps {
 	bottom: number;
 	left: number;
 	right: number;
+	zIndex?: number;
 	muted: boolean;
 }
 
@@ -79,6 +80,7 @@ function Media(props: IMediaProps): JSX.Element {
 				bottom: ${props.bottom}%;
 				left: ${props.left}%;
 				right: ${props.right}%;
+				z-index: ${props.zIndex ? props.zIndex : 0};
 				width: ${100 - (props.left + props.right)}%;
 				height: ${100 - (props.top + props.bottom)}%;
 			}
