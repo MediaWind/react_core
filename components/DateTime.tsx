@@ -10,10 +10,11 @@ interface IDateTimeProps {
 	format: string
 	className?: string;
 	locale?: "fr" | "en" | "nl"
+	updateInterval?: number
 }
 
 export default function DateTime(props: IDateTimeProps): JSX.Element {
-	const { format, className, locale, } = props;
+	const { format, className, locale, updateInterval, } = props;
 	const [dateTime, setDateTime] = useState<Dayjs>(dayjs());
 
 	dayjs.locale(locale ? locale : "fr");
@@ -21,7 +22,7 @@ export default function DateTime(props: IDateTimeProps): JSX.Element {
 	useEffect(() => {
 		setIntervalSync(() => {
 			setDateTime(dayjs());
-		}, 60 * 1000);
+		}, (updateInterval ?? 60) * 1000);
 	}, []);
 
 	return (
