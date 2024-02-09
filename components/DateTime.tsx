@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
-import "dayjs/locale/fr";
-import "dayjs/locale/en";
-import "dayjs/locale/nl";
+import "dayjs/locale";
 
 import { setIntervalSync } from "../customInterval";
 
 interface IDateTimeProps {
 	format: string
 	className?: string;
-	locale?: "fr" | "en" | "nl"
+	locale?: string
 	updateInterval?: number
 }
 
