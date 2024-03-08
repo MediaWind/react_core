@@ -21,14 +21,14 @@ export interface eIdData {
 }
 
 const useEId = (
-		eIdInserted: sharedVariable,
-		eIdRead: sharedVariable,
-		eIdRemoved: sharedVariable,
-		eIdError: sharedVariable,
-	): [eIdStatus, eIdData | null, string ] => {
+	eIdInserted: sharedVariable,
+	eIdRead: sharedVariable,
+	eIdRemoved: sharedVariable,
+	eIdError: sharedVariable
+): [eIdStatus, eIdData | null, string ] => {
 
 	const [status, setStatus] = useState<eIdStatus>(eIdStatus.REMOVED);
-	const [error, setError] = useState<string>("");
+	const [error, setError] = useState<"" | "unresponsive_card" | "unknown_card">("");
 	const [data, setData] = useState<eIdData | null>(null);
 
 	useEffect(() => {
@@ -40,11 +40,10 @@ const useEId = (
 	}, [eIdInserted]);
 
 	useEffect(() => {
-
 		axios.get("http://localhost:5000/?action&read_eid_error", {
-				withCredentials: false,
+			withCredentials: false,
 		}).then((result) => {
-			setError(result.error ? result.message: "");
+			setError(result.data.error ? result.data.message : "");
 		});
 
 	}, [eIdError]);
