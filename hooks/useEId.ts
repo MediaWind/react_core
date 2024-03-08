@@ -59,6 +59,9 @@ const useEId = (
 				if (result?.data?.status == true) {
 					setData({
 						addressZip: result.data.eid.address_zip,
+						addressMunicipality: result.data.eid.address_municipality,
+						addressStreetAndNumber: result.data.eid.address_street_and_number,
+						cardNumber: result.data.eid.card_number,
 						dateOfBirth: result.data.eid.date_of_birth,
 						firstName: result.data.eid.firstname,
 						gender: result.data.eid.gender,
@@ -66,6 +69,8 @@ const useEId = (
 						locationOfBirth: result.data.eid.location_of_birth,
 						nationalNumber: result.data.eid.national_number,
 						nationality: result.data.eid.nationality,
+						validityBeginDate: result.data.eid.validity_begin_date,
+						validityEndDate: result.data.eid.validity_end_date,
 					} as eIdData);
 				} else {
 					setData(null);
