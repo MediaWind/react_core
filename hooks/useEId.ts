@@ -20,16 +20,34 @@ export interface eIdData {
 	gender: string;
 }
 
-const useEId = (eIdInserted: sharedVariable, eIdRead: sharedVariable, eIdRemoved: sharedVariable): [eIdStatus, eIdData | null] => {
+const useEId = (
+		eIdInserted: sharedVariable,
+		eIdRead: sharedVariable,
+		eIdRemoved: sharedVariable,
+		eIdError: sharedVariable,
+	): [eIdStatus, eIdData | null, string ] => {
+
 	const [status, setStatus] = useState<eIdStatus>(eIdStatus.REMOVED);
+	const [error, setError] = useState<string>("");
 	const [data, setData] = useState<eIdData | null>(null);
 
 	useEffect(() => {
 		if (eIdInserted != null) {
 			setStatus(eIdStatus.INSERTED);
 			setData(null);
+			setError("");
 		}
 	}, [eIdInserted]);
+
+	useEffect(() => {
+
+		axios.get("http://localhost:5000/?action&read_eid_error", {
+				withCredentials: false,
+		}).then((result) => {
+			setError(result.error ? result.message: "");
+		});
+
+	}, [eIdError]);
 
 	useEffect(() => {
 		if (eIdRead != null) {
@@ -62,10 +80,11 @@ const useEId = (eIdInserted: sharedVariable, eIdRead: sharedVariable, eIdRemoved
 		if (eIdRemoved != null) {
 			setStatus(eIdStatus.REMOVED);
 			setData(null);
+			setError("");
 		}
 	}, [eIdRemoved]);
 
-	return [status, data];
+	return [status, data, error];
 };
 
 export default useEId;
