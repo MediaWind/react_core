@@ -40,12 +40,13 @@ const useEId = (
 	}, [eIdInserted]);
 
 	useEffect(() => {
-		axios.get("http://localhost:5000/?action&read_eid_error", {
-			withCredentials: false,
-		}).then((result) => {
-			setError(result.data.error ? result.data.message : "");
-		});
-
+		if (eIdError !== null) {
+			axios.get("http://localhost:5000/?action&read_eid_error", {
+				withCredentials: false,
+			}).then((result) => {
+				setError(result.data.error ? result.data.message : "");
+			});
+		}
 	}, [eIdError]);
 
 	useEffect(() => {
