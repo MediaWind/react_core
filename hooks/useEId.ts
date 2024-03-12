@@ -20,16 +20,34 @@ export interface eIdData {
 	gender: string;
 }
 
-const useEId = (eIdInserted: sharedVariable, eIdRead: sharedVariable, eIdRemoved: sharedVariable): [eIdStatus, eIdData | null] => {
+const useEId = (
+	eIdInserted: sharedVariable,
+	eIdRead: sharedVariable,
+	eIdRemoved: sharedVariable,
+	eIdError: sharedVariable
+): [eIdStatus, eIdData | null, string ] => {
+
 	const [status, setStatus] = useState<eIdStatus>(eIdStatus.REMOVED);
+	const [error, setError] = useState<"" | "unresponsive_card" | "unknown_card">("");
 	const [data, setData] = useState<eIdData | null>(null);
 
 	useEffect(() => {
 		if (eIdInserted != null) {
 			setStatus(eIdStatus.INSERTED);
 			setData(null);
+			setError("");
 		}
 	}, [eIdInserted]);
+
+	useEffect(() => {
+		if (eIdError !== null) {
+			axios.get("http://localhost:5000/?action&read_eid_error", {
+				withCredentials: false,
+			}).then((result) => {
+				setError(result.data.error ? result.data.message : "");
+			});
+		}
+	}, [eIdError]);
 
 	useEffect(() => {
 		if (eIdRead != null) {
@@ -41,6 +59,9 @@ const useEId = (eIdInserted: sharedVariable, eIdRead: sharedVariable, eIdRemoved
 				if (result?.data?.status == true) {
 					setData({
 						addressZip: result.data.eid.address_zip,
+						addressMunicipality: result.data.eid.address_municipality,
+						addressStreetAndNumber: result.data.eid.address_street_and_number,
+						cardNumber: result.data.eid.card_number,
 						dateOfBirth: result.data.eid.date_of_birth,
 						firstName: result.data.eid.firstname,
 						gender: result.data.eid.gender,
@@ -48,6 +69,8 @@ const useEId = (eIdInserted: sharedVariable, eIdRead: sharedVariable, eIdRemoved
 						locationOfBirth: result.data.eid.location_of_birth,
 						nationalNumber: result.data.eid.national_number,
 						nationality: result.data.eid.nationality,
+						validityBeginDate: result.data.eid.validity_begin_date,
+						validityEndDate: result.data.eid.validity_end_date,
 					} as eIdData);
 				} else {
 					setData(null);
@@ -62,10 +85,11 @@ const useEId = (eIdInserted: sharedVariable, eIdRead: sharedVariable, eIdRemoved
 		if (eIdRemoved != null) {
 			setStatus(eIdStatus.REMOVED);
 			setData(null);
+			setError("");
 		}
 	}, [eIdRemoved]);
 
-	return [status, data];
+	return [status, data, error];
 };
 
 export default useEId;
