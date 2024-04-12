@@ -10,14 +10,19 @@ export enum eIdStatus {
 }
 
 export interface eIdData {
-	firstName: string;
-	lastName: string;
-	addressZip: string;
-	dateOfBirth: string;
-	locationOfBirth: string;
-	nationalNumber: string;
-	nationality: string;
-	gender: string;
+	firstName: string,
+	lastName: string,
+	addressStreetAndNumber: string,
+	addressZip: string,
+	addressMunicipality: string,
+	dateOfBirth: string,
+	locationOfBirth: string,
+	nationalNumber: string,
+	nationality: string,
+	gender: string,
+	cardNumber: string,
+	validityBeginDate: string,
+	validityEndDate: string,
 }
 
 const useEId = (
@@ -58,17 +63,17 @@ const useEId = (
 			}).then((result) => {
 				if (result?.data?.status == true) {
 					setData({
+						firstName: result.data.eid.firstname,
+						lastName: result.data.eid.lastname,
+						addressStreetAndNumber: result.data.eid.address_street_and_number,
 						addressZip: result.data.eid.address_zip,
 						addressMunicipality: result.data.eid.address_municipality,
-						addressStreetAndNumber: result.data.eid.address_street_and_number,
-						cardNumber: result.data.eid.card_number,
 						dateOfBirth: result.data.eid.date_of_birth,
-						firstName: result.data.eid.firstname,
-						gender: result.data.eid.gender,
-						lastName: result.data.eid.lastname,
 						locationOfBirth: result.data.eid.location_of_birth,
 						nationalNumber: result.data.eid.national_number,
 						nationality: result.data.eid.nationality,
+						gender: result.data.eid.gender,
+						cardNumber: result.data.eid.card_number,
 						validityBeginDate: result.data.eid.validity_begin_date,
 						validityEndDate: result.data.eid.validity_end_date,
 					} as eIdData);
