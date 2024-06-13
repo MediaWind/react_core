@@ -56,8 +56,6 @@ const useEId = (
 
 	useEffect(() => {
 		if (eIdRead != null) {
-			setStatus(eIdStatus.READ);
-
 			axios.get("http://localhost:5000/?action&read_eid", {
 				withCredentials: false,
 			}).then((result) => {
@@ -82,6 +80,8 @@ const useEId = (
 				}
 			}).catch(() => {
 				setData(null);
+			}).finally(() => {
+				setStatus(eIdStatus.READ);
 			});
 		}
 	}, [eIdRead]);
