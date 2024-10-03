@@ -14,6 +14,8 @@ interface IMediaProps {
 	right: number;
 	zIndex?: number;
 	muted: boolean;
+	width?: number;
+	height?: number;
 }
 
 function Media(props: IMediaProps): JSX.Element {
@@ -60,6 +62,7 @@ function Media(props: IMediaProps): JSX.Element {
 				container.innerHTML = `<video src="${props.url}" autoPlay ${props.muted ? "muted" : ""} loop></video>`;
 
 				break;
+			case "image/gif":
 			case "image/png":
 			case "image/jpeg":
 				container.innerHTML = `<img src="${props.url}" />`;
@@ -71,6 +74,8 @@ function Media(props: IMediaProps): JSX.Element {
 				break;
 		}
 	}
+	const width = props.width ? props.width : 100 - (props.left + props.right);
+	const height = props.height ? props.height : 100 - (props.top + props.bottom);
 
 	return <style>
 		{`
@@ -81,8 +86,8 @@ function Media(props: IMediaProps): JSX.Element {
 				left: ${props.left}%;
 				right: ${props.right}%;
 				z-index: ${props.zIndex ? props.zIndex : 0};
-				width: ${100 - (props.left + props.right)}%;
-				height: ${100 - (props.top + props.bottom)}%;
+				width: ${width}%;
+				height: ${height}%;
 			}
 		`}
 	</style>;
