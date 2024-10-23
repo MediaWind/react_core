@@ -50,6 +50,7 @@ function Media(props: IMediaProps): JSX.Element {
 	}
 
 	if (container != null) {
+		container.classList.add("media");
 		container.style.position = "absolute";
 		container.style.top = `${props.top}%`;
 		container.style.bottom = `${props.bottom}%`;
@@ -95,7 +96,23 @@ function Media(props: IMediaProps): JSX.Element {
 		}
 	}
 
-	return <></>;
+	const width = props.width ? props.width : 100 - (props.left + props.right);
+	const height = props.height ? props.height : 100 - (props.top + props.bottom);
+
+	return <style>
+			{`
+				.media {
+					position: absolute;
+					top: ${props.top}%;
+					bottom: ${props.bottom}%;
+					left: ${props.left}%;
+					right: ${props.right}%;
+					z-index: ${props.zIndex ? props.zIndex : 0};
+					width: ${width}%;
+					height: ${height}%;
+				}
+			`}
+	</style>;
 }
 
 export default Media;
