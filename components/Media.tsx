@@ -100,18 +100,18 @@ function Media(props: IMediaProps): JSX.Element {
 	const height = props.height ? props.height : 100 - (props.top + props.bottom);
 
 	return <style>
-			{`
-				.media {
-					position: absolute;
-					top: ${props.top}%;
-					bottom: ${props.bottom}%;
-					left: ${props.left}%;
-					right: ${props.right}%;
-					z-index: ${props.zIndex ? props.zIndex : 0};
-					width: ${width}%;
-					height: ${height}%;
-				}
-			`}
+		{`
+			.media {
+				position: absolute;
+				top: ${props.top}%;
+				bottom: ${props.bottom}%;
+				left: ${props.left}%;
+				right: ${props.right}%;
+				z-index: ${props.zIndex ? props.zIndex : 0};
+				width: ${width}%;
+				height: ${height}%;
+			}
+		`}
 	</style>;
 }
 
