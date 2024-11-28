@@ -27,11 +27,11 @@ export class DefaultVariables {
 	static PLAYER_KEY = (process.env.NODE_ENV === "production" ? "{player_key}" : process.env.REACT_APP_KEY_PLAYER ?? "ay3asIzHnxI0Q") as string;
 	static PLAYER_TYPE = (process.env.NODE_ENV === "production" ? parseInt("{player_type}") : parseInt(process.env.REACT_APP_PLAYER_TYPE ?? "11")) as number;
 	static PLAYER_TYPE_HW = (process.env.NODE_ENV === "production" ? parseInt("{player_type_hw}") : parseInt(process.env.REACT_APP_PLAYER_TYPE_HW ?? "28")) as number;
-	static PLAYER_FAMILY = (process.env.NODE_ENV === "production" ? "{player_family}" : process.env. REACT_APP_PLAYER_FAMILY ?? "android") as string;
+	static PLAYER_FAMILY = (process.env.NODE_ENV === "production" ? "{player_family}" : process.env.REACT_APP_PLAYER_FAMILY ?? "android") as string;
 	static PLAYER_FIRMWARE = (process.env.NODE_ENV === "production" ? "{player_firmware}" : process.env.REACT_APP_PLAYER_FIRMWARE ?? "0.5.10") as string;
 	static WIDGET_FOLDER = (process.env.NODE_ENV === "production" ? "{widget_folder}" : "/") as string;
-	static DOMAINE = (process.env.NODE_ENV === "production" ? "{domaine}" : "modules.greenplayer.com") as string;
-	static DOMAINE_HTTP = (process.env.NODE_ENV === "production" ? "{domaine_http}" : "https://modules.greenplayer.com") as string;
+	static DOMAINE = (process.env.NODE_ENV === "production" ? "{domaine}" : process.env.REACT_APP_DOMAINE ?? "modules.greenplayer.com") as string;
+	static DOMAINE_HTTP = (process.env.NODE_ENV === "production" ? "{domaine_http}" : process.env.REACT_APP_DOMAINE_HTTP ??  "https://modules.greenplayer.com") as string;
 	static TYPE_PLAYER = (process.env.NODE_ENV === "production" ? parseInt("{type_player}") : 0) as number;
 	static NAME_PLAYER = (process.env.NODE_ENV === "production" ? "{name_player}" : "Development Environment") as string;
 	static DISPLAY_SIZE_INCH = (process.env.NODE_ENV === "production" ? parseFloat("{display_size_inch}") : 0.0) as number;

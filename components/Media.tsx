@@ -80,7 +80,18 @@ function Media(props: IMediaProps): JSX.Element {
 
 				break;
 			case "video/mp4":
+			case "video/quicktime":
 				container.innerHTML = `<video src="${props.url}" autoPlay ${props.muted ? "muted" : ""} loop></video>`;
+
+				if (props.url.includes("http")) {
+					const videoHtml = container.getElementsByTagName("video")[0];
+					window.addEventListener("offline", () => {
+						videoHtml.pause();
+					});
+					window.addEventListener("online", () => {
+						videoHtml.play();
+					});
+				}
 
 				break;
 			case "image/gif":
