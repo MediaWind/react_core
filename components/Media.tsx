@@ -18,6 +18,7 @@ interface IMediaProps {
 	muted: boolean;
 	width?: number;
 	height?: number;
+	domain?: string;
 }
 
 function Media(props: IMediaProps): JSX.Element {
@@ -91,6 +92,34 @@ function Media(props: IMediaProps): JSX.Element {
 					window.addEventListener("online", () => {
 						videoHtml.play();
 					});
+
+					if (props.domain) {
+						let lastEnd = 0;
+						setInterval(function(){
+							if (!videoHtml.paused) {
+								lastEnd = videoHtml.played.end(0);
+							}
+						},10000)
+
+						setInterval(function(){
+							const xhr = new XMLHttpRequest();
+							xhr.open("GET", props.domain + "/services/ping/index.php");
+							xhr.onload = function() {
+								if (xhr.status === 200) {
+									if (videoHtml.paused) {
+										videoHtml.load();
+										videoHtml.currentTime = lastEnd;
+									}
+								} else {
+									if (!videoHtml.paused) {
+										videoHtml.pause();
+									}
+								}
+							};
+							xhr.send();
+
+						}, 30000);
+					}
 				}
 
 				break;
