@@ -99,7 +99,7 @@ function Media(props: IMediaProps): JSX.Element {
 							if (!videoHtml.paused) {
 								lastEnd = videoHtml.played.end(0);
 							}
-						},10000)
+						}, 10000);
 
 						setInterval(function(){
 							const xhr = new XMLHttpRequest();
@@ -108,7 +108,9 @@ function Media(props: IMediaProps): JSX.Element {
 								if (xhr.status === 200) {
 									if (videoHtml.paused) {
 										videoHtml.load();
-										videoHtml.currentTime = lastEnd;
+										videoHtml.onplay = function() {
+											videoHtml.currentTime = lastEnd;
+										};
 									}
 								} else {
 									if (!videoHtml.paused) {
