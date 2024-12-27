@@ -74,6 +74,11 @@ const useEId = (
 						cardNumber: result.data.eid.card_number,
 						validityBeginDate: result.data.eid.validity_begin_date,
 						validityEndDate: result.data.eid.validity_end_date,
+						chipNumber: result.data.eid.chip_number,
+						issuingMunicipality: result.data.eid.issuing_municipality,
+						firstLettterofThirdGivenName: result.data.eid.first_letter_of_third_given_name,
+						specialStatus: result.data.eid.special_status,
+						photoHash: result.data.eid.photo_hash,
 					} as eIdData);
 				} else {
 					setData(null);
