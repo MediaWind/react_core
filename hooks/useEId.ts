@@ -23,9 +23,10 @@ export interface eIdData {
 	cardNumber: string,
 	validityBeginDate: string,
 	validityEndDate: string,
-	issuingMunicipality: string,
-	firstLetterOfThirdGivenName: string,
-	specialStatus: string,
+	issuingMunicipality?: string,
+	firstLetterOfThirdGivenName?: string,
+	specialStatus?: string,
+	chipNumber?: string,
 }
 
 const useEId = (
@@ -77,10 +78,10 @@ const useEId = (
 						cardNumber: result.data.eid.card_number,
 						validityBeginDate: result.data.eid.validity_begin_date,
 						validityEndDate: result.data.eid.validity_end_date,
-						chipNumber: result.data.eid.chip_number ?? "",
-						issuingMunicipality: result.data.eid.issuing_municipality ?? "",
-						specialStatus: result.data.eid.special_status ?? "",
-						firstLetterOfThirdGivenName: result.data.eid.first_letter_of_third_given_name ?? "",
+						chipNumber: result.data.eid.chip_number,
+						issuingMunicipality: result.data.eid.issuing_municipality,
+						specialStatus: result.data.eid.special_status,
+						firstLetterOfThirdGivenName: result.data.eid.first_letter_of_third_given_name,
 					} as eIdData);
 				} else {
 					setData(null);
