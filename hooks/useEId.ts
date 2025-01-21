@@ -23,10 +23,10 @@ export interface eIdData {
 	cardNumber: string,
 	validityBeginDate: string,
 	validityEndDate: string,
-	issuingMunicipality?: string,
-	firstLetterOfThirdGivenName?: string,
-	specialStatus?: string,
-	chipNumber?: string,
+	issuingMunicipality: string | undefined,
+	firstLetterOfThirdGivenName: string | undefined,
+	specialStatus: string | undefined,
+	chipNumber: string | undefined,
 }
 
 const useEId = (
