@@ -99,57 +99,52 @@ function Media(props: IMediaProps): JSX.Element {
 
 				if (props.url.includes("http") ) {
 					const videoHtml = container.getElementsByTagName("video")[0];
-					const init = videoHtml.getAttribute("init") ?? "";
 
-					if (init != "1") {
-						videoHtml.setAttribute("init", "1");
+					if (props.domain && document.body.contains(videoHtml)) {
+						let lastEnd = 0;
+						const randomId = Math.floor(Math.random() * 100);
 
-						if (props.domain && document.body.contains(videoHtml)) {
-							let lastEnd = 0;
-							const randomId = Math.floor(Math.random() * 100);
+						// @ts-ignore
+						refInterval10.current = setInterval(function(){
+							if (!videoHtml.paused) {
+								console.log("randomId", randomId);
+								const lastEndNow = videoHtml.currentTime;
+								if (lastEndNow == lastEnd) {
+									console.log("Video blocked at " + lastEnd + " on " + videoHtml.duration);
+									lastEnd = loadVideo(videoHtml, 0, 0);
+								} else {
+									lastEnd = lastEndNow;
+								}
+							}
+						}, 10000);
 
-							// @ts-ignore
-							refInterval10.current = setInterval(function(){
-								if (!videoHtml.paused) {
-									console.log("randomId", randomId);
-									const lastEndNow = videoHtml.currentTime;
-									if (lastEndNow == lastEnd) {
-										console.log("Video blocked at " + lastEnd + " on " + videoHtml.duration);
-										lastEnd = loadVideo(videoHtml, 0, 0);
-									} else {
-										lastEnd = lastEndNow;
+						// @ts-ignore
+						refInterval30.current = setInterval(function(){
+							const xhr = new XMLHttpRequest();
+							xhr.open("GET", props.domain + "/services/ping/index.php");
+							xhr.onload = function() {
+								if (xhr.status === 200) {
+									if (videoHtml.paused) {
+										console.log("Online");
+										lastEnd = loadVideo(videoHtml, lastEnd, 0);
+									}
+								} else {
+									if (!videoHtml.paused) {
+										console.log("Offline. Video on pause");
+										videoHtml.pause();
 									}
 								}
-							}, 10000);
+							};
+							xhr.send();
+						}, 30000);
 
-							// @ts-ignore
-							refInterval30.current = setInterval(function(){
-								const xhr = new XMLHttpRequest();
-								xhr.open("GET", props.domain + "/services/ping/index.php");
-								xhr.onload = function() {
-									if (xhr.status === 200) {
-										if (videoHtml.paused) {
-											console.log("Online");
-											lastEnd = loadVideo(videoHtml, lastEnd, 0);
-										}
-									} else {
-										if (!videoHtml.paused) {
-											console.log("Offline. Video on pause");
-											videoHtml.pause();
-										}
-									}
-								};
-								xhr.send();
-							}, 30000);
-
-						} else {
-							window.addEventListener("offline", () => {
-								videoHtml.pause();
-							});
-							window.addEventListener("online", () => {
-								videoHtml.play();
-							});
-						}
+					} else {
+						window.addEventListener("offline", () => {
+							videoHtml.pause();
+						});
+						window.addEventListener("online", () => {
+							videoHtml.play();
+						});
 					}
 				}
 
