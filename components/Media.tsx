@@ -137,14 +137,6 @@ function Media(props: IMediaProps): JSX.Element {
 							};
 							xhr.send();
 						}, 30000);
-
-					} else {
-						window.addEventListener("offline", () => {
-							videoHtml.pause();
-						});
-						window.addEventListener("online", () => {
-							videoHtml.play();
-						});
 					}
 				}
 
@@ -176,7 +168,6 @@ function Media(props: IMediaProps): JSX.Element {
 				lastEnd = 0;
 			}
 			videoHtml.currentTime = lastEnd;
-			videoHtml.onerror = undefined;
 		};
 		videoHtml.onerror = function() {
 			if (nbTry < 5) {
