@@ -102,12 +102,10 @@ function Media(props: IMediaProps): JSX.Element {
 
 					if (props.domain && document.body.contains(videoHtml)) {
 						let lastEnd = 0;
-						const randomId = Math.floor(Math.random() * 100);
 
 						// @ts-ignore
 						refInterval10.current = setInterval(function(){
 							if (!videoHtml.paused) {
-								console.log("randomId", randomId);
 								const lastEndNow = videoHtml.currentTime;
 								if (lastEndNow == lastEnd) {
 									console.log("Video blocked at " + lastEnd + " on " + videoHtml.duration);
