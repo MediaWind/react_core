@@ -22,6 +22,13 @@ interface IMediaProps {
 }
 
 function Media(props: IMediaProps): JSX.Element {
+
+	// @ts-ignore
+	const refInterval10 = useRef ();
+
+	// @ts-ignore
+	const refInterval30 = useRef ();
+
 	useEffect(() => {	
 		// Remove media element if they are generated outside the classic flow
 		return () => {
@@ -29,6 +36,9 @@ function Media(props: IMediaProps): JSX.Element {
 			if (element) {
 				element.remove();
 			}
+
+			clearInterval(refInterval10.current);
+			clearInterval(refInterval30.current);
 		};
 	},[]);
 
@@ -82,45 +92,64 @@ function Media(props: IMediaProps): JSX.Element {
 				break;
 			case "video/mp4":
 			case "video/quicktime":
+				clearInterval(refInterval10.current);
+				clearInterval(refInterval30.current);
+
 				container.innerHTML = `<video src="${props.url}" autoPlay ${props.muted ? "muted" : ""} loop></video>`;
 
-				if (props.url.includes("http")) {
+				if (props.url.includes("http") ) {
 					const videoHtml = container.getElementsByTagName("video")[0];
-					window.addEventListener("offline", () => {
-						videoHtml.pause();
-					});
-					window.addEventListener("online", () => {
-						videoHtml.play();
-					});
+					const init = videoHtml.getAttribute("init") ?? "";
 
-					if (props.domain) {
-						let lastEnd = 0;
-						setInterval(function(){
-							if (!videoHtml.paused) {
-								lastEnd = videoHtml.played.end(0);
-							}
-						}, 10000);
+					if (init != "1") {
+						videoHtml.setAttribute("init", "1");
 
-						setInterval(function(){
-							const xhr = new XMLHttpRequest();
-							xhr.open("GET", props.domain + "/services/ping/index.php");
-							xhr.onload = function() {
-								if (xhr.status === 200) {
-									if (videoHtml.paused) {
-										videoHtml.load();
-										videoHtml.onplay = function() {
-											videoHtml.currentTime = lastEnd;
-										};
-									}
-								} else {
-									if (!videoHtml.paused) {
-										videoHtml.pause();
+						if (props.domain && document.body.contains(videoHtml)) {
+							let lastEnd = 0;
+							const randomId = Math.floor(Math.random() * 100);
+
+							// @ts-ignore
+							refInterval10.current = setInterval(function(){
+								if (!videoHtml.paused) {
+									console.log("randomId", randomId);
+									const lastEndNow = videoHtml.currentTime;
+									if (lastEndNow == lastEnd) {
+										console.log("Video blocked at " + lastEnd + " on " + videoHtml.duration);
+										lastEnd = loadVideo(videoHtml, 0, 0);
+									} else {
+										lastEnd = lastEndNow;
 									}
 								}
-							};
-							xhr.send();
+							}, 10000);
 
-						}, 30000);
+							// @ts-ignore
+							refInterval30.current = setInterval(function(){
+								const xhr = new XMLHttpRequest();
+								xhr.open("GET", props.domain + "/services/ping/index.php");
+								xhr.onload = function() {
+									if (xhr.status === 200) {
+										if (videoHtml.paused) {
+											console.log("Online");
+											lastEnd = loadVideo(videoHtml, lastEnd, 0);
+										}
+									} else {
+										if (!videoHtml.paused) {
+											console.log("Offline. Video on pause");
+											videoHtml.pause();
+										}
+									}
+								};
+								xhr.send();
+							}, 30000);
+
+						} else {
+							window.addEventListener("offline", () => {
+								videoHtml.pause();
+							});
+							window.addEventListener("online", () => {
+								videoHtml.play();
+							});
+						}
 					}
 				}
 
@@ -136,6 +165,32 @@ function Media(props: IMediaProps): JSX.Element {
 
 				break;
 		}
+	}
+
+	function loadVideo(videoHtml: any, lastEnd: number, nbTry: number):number {
+		console.log("Load video");
+		videoHtml.oncanplaythrough  = function() {
+			videoHtml.play();
+		};
+		videoHtml.onplay = function(){
+			const duration = videoHtml.duration;
+			if (isNaN(lastEnd)) {
+				lastEnd = 0;
+			}
+			if (lastEnd >= duration) {
+				lastEnd = 0;
+			}
+			videoHtml.currentTime = lastEnd;
+			videoHtml.onerror = undefined;
+		};
+		videoHtml.onerror = function() {
+			if (nbTry < 5) {
+				nbTry++;
+				lastEnd = loadVideo(videoHtml, lastEnd, nbTry);
+			}
+		};
+		videoHtml.load();
+		return lastEnd;
 	}
 
 	const width = props.width ? props.width : 100 - (props.left + props.right);
