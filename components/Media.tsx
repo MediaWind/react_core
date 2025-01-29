@@ -4,7 +4,7 @@ import mime from "mime";
 
 import useHtml from "../hooks/useHtml";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 interface IMediaProps {
 	UUID: string;
