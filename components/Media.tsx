@@ -22,12 +22,8 @@ interface IMediaProps {
 }
 
 function Media(props: IMediaProps): JSX.Element {
-
-	// @ts-ignore
-	const refInterval10 = useRef ();
-
-	// @ts-ignore
-	const refInterval30 = useRef ();
+	const refInterval10 = useRef<NodeJS.Timeout | null>(null);
+	const refInterval30 = useRef<NodeJS.Timeout | null>(null);
 
 	useEffect(() => {	
 		// Remove media element if they are generated outside the classic flow
@@ -37,8 +33,12 @@ function Media(props: IMediaProps): JSX.Element {
 				element.remove();
 			}
 
-			clearInterval(refInterval10.current);
-			clearInterval(refInterval30.current);
+			if (refInterval10.current) {
+				clearInterval(refInterval10.current);
+			}
+			if (refInterval30.current) {
+				clearInterval(refInterval30.current);
+			}
 		};
 	},[]);
 
@@ -92,8 +92,12 @@ function Media(props: IMediaProps): JSX.Element {
 				break;
 			case "video/mp4":
 			case "video/quicktime":
-				clearInterval(refInterval10.current);
-				clearInterval(refInterval30.current);
+				if(refInterval10.current) {
+					clearInterval(refInterval10.current);
+				}
+				if(refInterval30.current) {
+					clearInterval(refInterval30.current);
+				}
 
 				container.innerHTML = `<video src="${props.url}" autoPlay ${props.muted ? "muted" : ""} loop></video>`;
 
@@ -103,7 +107,6 @@ function Media(props: IMediaProps): JSX.Element {
 					if (props.domain && document.body.contains(videoHtml)) {
 						let lastEnd = 0;
 
-						// @ts-ignore
 						refInterval10.current = setInterval(function(){
 							if (!videoHtml.paused) {
 								const lastEndNow = videoHtml.currentTime;
@@ -116,7 +119,6 @@ function Media(props: IMediaProps): JSX.Element {
 							}
 						}, 10000);
 
-						// @ts-ignore
 						refInterval30.current = setInterval(function(){
 							const xhr = new XMLHttpRequest();
 							xhr.open("GET", props.domain + "/services/ping/index.php");
