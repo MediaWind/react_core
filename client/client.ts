@@ -117,10 +117,16 @@ export class EMDK extends (EventEmitter as new () => TypedEmitter<EMDKCallbacks>
 
 		/// Subscribe to the Native Emitter
 		_kitedevice.addListener("emdk_data_scanned", (data: InternalData) => {
-			this.emit(EMDKEvent.DataScanned, {
-				data: Base64.toUint8Array(data.data),
-				label_type: data.label_type,
-			});
+			console.log("EMDK Data scanned:", data);
+
+			try {
+				this.emit(EMDKEvent.DataScanned, {
+					data: Base64.toUint8Array(data.data),
+					label_type: data.label_type,
+				});
+			} catch (error) {
+				console.error("Error emitting EMDK data scanned event:", error);
+			}
 		});
 	}
 
