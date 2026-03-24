@@ -40,9 +40,9 @@ function Media(props: IMediaProps): JSX.Element {
 				clearInterval(refInterval30.current);
 			}
 		};
-	},[]);
+	},[props.UUID, ]);
 
-	if (props.url == "") {
+	if (props.url === "") {
 		return <p>{props.emptyUrlError}</p>;
 	}
 

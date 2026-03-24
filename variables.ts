@@ -76,9 +76,9 @@ export class DefaultVariables {
 	static LAYER = (process.env.NODE_ENV === "production" ? "{layer}" : "/") as string;
 
 	static C_FULL_SCREEN(): boolean {
-		console.log("full screen:", this.HEIGHT, this.VIEWPORT_HEIGHT, this.WIDTH, this.VIEWPORT_WIDTH, this.HEIGHT == this.VIEWPORT_HEIGHT, this.WIDTH == this.VIEWPORT_WIDTH, this.HEIGHT == this.VIEWPORT_HEIGHT && this.WIDTH == this.VIEWPORT_WIDTH);
+		console.log("full screen:", this.HEIGHT, this.VIEWPORT_HEIGHT, this.WIDTH, this.VIEWPORT_WIDTH, this.HEIGHT === this.VIEWPORT_HEIGHT, this.WIDTH === this.VIEWPORT_WIDTH, this.HEIGHT === this.VIEWPORT_HEIGHT && this.WIDTH === this.VIEWPORT_WIDTH);
 
-		return this.HEIGHT == this.VIEWPORT_HEIGHT && this.WIDTH == this.VIEWPORT_WIDTH;
+		return this.HEIGHT === this.VIEWPORT_HEIGHT && this.WIDTH === this.VIEWPORT_WIDTH;
 	}
 
 	static C_ORIENTATION(): ORIENTATION {
