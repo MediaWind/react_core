@@ -40,13 +40,13 @@ function Media(props: IMediaProps): JSX.Element {
 				clearInterval(refInterval30.current);
 			}
 		};
-	},[props.UUID, ]);
+	},[props.UUID ]);
 
 	if (props.url === "") {
 		return <p>{props.emptyUrlError}</p>;
 	}
 
-	const type = mime.getType(props.url) as string;
+	const type = mime.lookup(props.url) as string;
 	const extension = props.url.split(".").pop();
 
 	let container = document.getElementById(props.UUID);
