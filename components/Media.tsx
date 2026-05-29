@@ -46,7 +46,7 @@ function Media(props: IMediaProps): JSX.Element {
 		return <p>{props.emptyUrlError}</p>;
 	}
 
-	const type = mime.lookup(props.url) ?? "";
+	const type = mime.getType(props.url) ?? "";
 	const extension = props.url.split(".").pop();
 
 	let container = document.getElementById(props.UUID);
